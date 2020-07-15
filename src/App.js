@@ -20,15 +20,20 @@ const list = [
 ];
 
 
-const App =() => 
+const App =() => {
+  const handleChange = e => {
+    console.log(e);
+  }
+  return (
   <div>
     <h1>Gal Stories</h1>
     <label htmlFor="search">Search: </label>
-    <input id="search" type="text" />
+    <input id="search" type="text" onChange={handleChange} />
     <hr />
     <List />
-    <List />
   </div>
+  )
+}
   
 
 
