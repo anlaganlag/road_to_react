@@ -19,37 +19,34 @@ const App = () => {
       objectID: 1,
     },
   ]
+  const [searchTerm, setSearchTerm] = React.useState('')
+
   //A在此處引入handleSearch
   const handleSearch = e => {
-    // C
-    console.log(e.target.value)
+    // C回到這裏執行這裏的代碼.
+    setSearchTerm(e.target.value);
     }
+
+  const searchedStories = stories.filter(story=> 
+    story.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
   
   return (
     <div>
       <h1> Gal Hacker Stories</h1>
       <Search onSearch={handleSearch} />
       <hr />
-      <List list={stories} />
+      <List list={searchedStories} />
     </div>
   )
 }
 
-const Search = props => {
-  const [searchTerm, setSearchTerm] = React.useState('')
-  const handleChange = e => {
-    setSearchTerm(e.target.value)
-    //B
-    props.onSearch(e)
-  }
-  return (
+const Search = props => (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
-      <p>正在查找: <strong>{searchTerm}</strong></p>
+      <input id="search" type="text" onChange={props.onSearch} />
     </div>
   )
-}
 
 const List= props => 
   props.list.map(e => (
