@@ -19,6 +19,7 @@ const App = () => {
       objectID: 1,
     },
   ]
+  //A在此處引入handleSearch
   const handleSearch = e => {
     // C
     console.log(e.target.value)
