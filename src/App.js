@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useState } from 'react'
 
 const App = () => {
   const stories = [
@@ -19,14 +19,18 @@ const App = () => {
       objectID: 1,
     },
   ];
+  const [searchTerm, setSearchTerm] = React.useState('');
+  
   const handleChange = e => {
-    console.log(e.target.value);
+    setSearchTerm(e.target.value);
   };
+
   return (
   <div>
     <h1>Gal Stories</h1>
     <label htmlFor="search">Search: </label>
     <input id="search" type="text" onChange={handleChange} />
+    <p>正在查找: <strong>{searchTerm}</strong></p>
     <hr />
     <List list={stories} />
   </div>
