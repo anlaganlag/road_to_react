@@ -20,8 +20,7 @@ const list = [
 ];
 
 
-export default function App() {
-  return (
+const App =() => 
   <div>
     <h1>Gal Stories</h1>
     <label htmlFor="search">Search: </label>
@@ -30,12 +29,11 @@ export default function App() {
     <List />
     <List />
   </div>
-  )
-}
+  
 
 
 
-const List= ()=> (
+const List= ()=> 
     <div>
       {list.map(e => 
           <div key={e.objectID}>
@@ -45,6 +43,8 @@ const List= ()=> (
             <span>{e.points}</span>
           </div>
       )}
-    </div>)
+    </div>
+  
+export default App
   
 
