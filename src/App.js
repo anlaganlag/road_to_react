@@ -19,20 +19,27 @@ const App = () => {
       objectID: 1,
     },
   ]
+  const handleSearch = e => {
+    // C
+    console.log(e.target.value)
+    }
+  
   return (
     <div>
       <h1> Gal Hacker Stories</h1>
-      <Search />
+      <Search onSearch={handleSearch} />
       <hr />
       <List list={stories} />
     </div>
   )
 }
 
-const Search = () => {
+const Search = props => {
   const [searchTerm, setSearchTerm] = React.useState('')
   const handleChange = e => {
     setSearchTerm(e.target.value)
+    //B
+    props.onSearch(e)
   }
   return (
     <div>
