@@ -18,27 +18,30 @@ const App = () => {
       points: 5,
       objectID: 1,
     },
-  ];
-  const [searchTerm, setSearchTerm] = React.useState('');
-  
-  const handleChange = e => {
-    setSearchTerm(e.target.value);
-  };
-
+  ]
   return (
-  <div>
-    <h1>Gal Stories</h1>
-    <label htmlFor="search">Search: </label>
-    <input id="search" type="text" onChange={handleChange} />
-    <p>正在查找: <strong>{searchTerm}</strong></p>
-    <hr />
-    <List list={stories} />
-  </div>
-  );
-};
-  
+    <div>
+      <h1> Gal Hacker Stories</h1>
+      <Search />
+      <hr />
+      <List list={stories} />
+    </div>
+  )
+}
 
-
+const Search = () => {
+  const [searchTerm, setSearchTerm] = React.useState('')
+  const handleChange = e => {
+    setSearchTerm(e.target.value)
+  }
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" onChange={handleChange} />
+      <p>正在查找: <strong>{searchTerm}</strong></p>
+    </div>
+  )
+}
 
 const List= props => 
   props.list.map(e => (
