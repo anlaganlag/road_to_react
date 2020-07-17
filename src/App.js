@@ -1,64 +1,56 @@
-import React , { useState } from 'react'
+import React, { useState, useRef, useLayoutEffect } from "react";
+import { useForm } from "./useForm";
+import { Hello } from "./Hello";
+import { useMeasure } from "./useMeasure";
 
 const App = () => {
-  const stories = [
-    {
-      title: 'React',
-      url: 'https://reactjs.org/',
-      author: 'Jordan Walke',
-      num_comments: 3,
-      points: 4,
-      objectID: 0,
-    },
-    {
-      title: 'Redux',
-      url: 'https://redux.js.org/',
-      author: 'Dan Abramov, Andrew Clark',
-      num_comments: 2,
-      points: 5,
-      objectID: 1,
-    },
-  ]
-  const [searchTerm, setSearchTerm] = React.useState('')
+  const [values, handleChange] = useForm({
+    email: "",
+    password: "",
+    firstName: ""
+  });
+  const inputRef = useRef();
+  const hello = useRef(() => console.log("hello"));
 
-  //A在此處引入handleSearch
-  const handleSearch = e => {
-    // C回到這裏執行這裏的代碼.
-    setSearchTerm(e.target.value);
-    }
+  const [showHello, setShowHello] = useState(true);
 
-  const searchedStories = stories.filter(story=> 
-    story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
-  
+  const [rect, inputRef2] = useMeasure([]);
+
   return (
     <div>
-      <h1> Gal Hacker Stories</h1>
-      <Search onSearch={handleSearch} />
-      <hr />
-      <List list={searchedStories} />
+      <>
+        <button onClick={() => setShowHello(!showHello)}>toggle</button>
+        {showHello && <Hello />}
+        <input
+          ref={inputRef}
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+        />
+        <input
+          ref={inputRef2}
+          name="firstName"
+          placeholder="first name"
+          value={values.firstName}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+        />
+        <button
+          onClick={() => {
+            inputRef.current.focus();
+            hello.current();
+          }}
+        >
+          focus
+        </button>
+      </>
     </div>
-  )
-}
+  );
+};
 
-const Search = props => (
-    <div>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={props.onSearch} />
-    </div>
-  )
-
-const List= props => 
-  props.list.map(e => (
-    <div key={e.objectID}>
-      <span><a href={e.url}>{e.title}</a></span>
-      <span>{e.author}</span>
-      <span>{e.num_comments}</span>
-      <span>{e.points}</span>
-    </div>
-  ));
-
-  
-export default App
-  
-
+export default App;
